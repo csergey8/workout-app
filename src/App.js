@@ -10,6 +10,13 @@ class App extends Component {
   }
 
   getExercisesByMuscles() {
+    const initExercises = muscles.reduce((exercises, category) => ({
+      ...exercises,
+      [category]: []
+    }), {})
+
+    console.log(muscles, initExercises)
+
     return Object.entries(this.state.exercises.reduce((exercises, exercise) => {
       const { muscles } = exercise;
       
@@ -17,7 +24,7 @@ class App extends Component {
 
 
       return exercises
-    }, {}))
+    }, initExercises))
   }
 
   handleCategorySelect = category => {
@@ -40,12 +47,25 @@ class App extends Component {
     }))
   }
 
+  handleExreciseDelete = (id) => {
+    console.log(id);
+    this.setState(({ exercises }) => ({
+      exercises: exercises.filter( ex => ex.id !== id)
+    }))
+  }
+
   render() {
     const exercises = this.getExercisesByMuscles();
     return (
       <Fragment>
         <Header muscles={muscles} onExerciseCreate={this.handleExerciseCreate}/>
-        <Exercises exercises={exercises} exercise={this.state.exercise} category={this.state.category} onSelect={this.handleExerciseSelect}/>
+        <Exercises 
+        exercises={exercises} 
+        exercise={this.state.exercise} 
+        category={this.state.category} 
+        onSelect={this.handleExerciseSelect}
+        onDelete={this.handleExreciseDelete}
+        />
         <Footer muscles={muscles} onSelect={this.handleCategorySelect} category={this.state.category}/>
       </Fragment>
     )
