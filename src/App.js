@@ -34,11 +34,12 @@ class App extends Component {
   }
   handleExerciseSelect = id => {
     this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id )
+      exercise: exercises.find(ex => ex.id === id ),
+      editMode: false
     }))
   }
 
-  handleExerciseCreate = (exercise) => {
+  handleExerciseCreate = exercise => {
     this.setState(({ exercises }) => ({
       exercises: [
         ...exercises,
@@ -47,10 +48,28 @@ class App extends Component {
     }))
   }
 
-  handleExreciseDelete = (id) => {
-    console.log(id);
+  handleExerciseSelectEdit = id => {
     this.setState(({ exercises }) => ({
-      exercises: exercises.filter( ex => ex.id !== id)
+      exercise: exercises.find(ex => ex.id === id ),
+      editMode: true
+    }))
+  }
+
+  handleExreciseDelete = (id) => {
+    this.setState(({ exercises }) => ({
+      exercises: exercises.filter( ex => ex.id !== id),
+      editMode: false,
+      exercise: {}
+    }))
+  }
+
+  handleExerciseEdit = exercise => {
+    this.setState(({ exercises }) => ({
+      exercises: [
+          ...exercises.filter(ex => ex.id !== exercise.id),
+          exercise
+      ],
+      exercise
     }))
   }
 
@@ -65,6 +84,10 @@ class App extends Component {
         category={this.state.category} 
         onSelect={this.handleExerciseSelect}
         onDelete={this.handleExreciseDelete}
+        onSelectEdit={this.handleExerciseSelectEdit}
+        editMode={this.state.editMode}
+        muscles={muscles}
+        onEdit={this.handleExerciseEdit}
         />
         <Footer muscles={muscles} onSelect={this.handleCategorySelect} category={this.state.category}/>
       </Fragment>
