@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
     FormControl: {
-      width: 500
+      width: 250
     }
   })
 
@@ -18,10 +18,8 @@ export default withStyles(styles)(class extends Component {
 
   state = this.getInitialState();
 
-  componentWillReceiveProps({ exercise }) {
-    this.setState({
-      ...exercise
-    })
+  static getDerivedStateFromProps({ exercise }) {
+    return exercise || null
   }
 
   getInitialState() {

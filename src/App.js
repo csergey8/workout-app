@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { CssBaseline }  from  '@material-ui/core';
 import { Header, Footer } from './Components/Layouts/index'; 
 import Exercises from './Components/Exercises';
 import { exercises, muscles } from './store';
@@ -55,11 +56,11 @@ class App extends Component {
     }))
   }
 
-  handleExreciseDelete = (id) => {
-    this.setState(({ exercises }) => ({
+  handleExreciseDelete = id => {
+    this.setState(({ exercises, exercise, editMode }) => ({
       exercises: exercises.filter( ex => ex.id !== id),
-      editMode: false,
-      exercise: {}
+      editMode: exercise.id === id ? false : editMode,
+      exercise: exercise.id === id ? {} : exercise
     }))
   }
 
@@ -77,6 +78,7 @@ class App extends Component {
     const exercises = this.getExercisesByMuscles();
     return (
       <Fragment>
+      <CssBaseline />
         <Header muscles={muscles} onExerciseCreate={this.handleExerciseCreate}/>
         <Exercises 
         exercises={exercises} 

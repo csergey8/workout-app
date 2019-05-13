@@ -1,8 +1,9 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core'; 
+import { withWidth } from '@material-ui/core';
 
 
-const Footer = ({ muscles, onSelect, category }) => {
+export default withWidth()(({ muscles, onSelect, category, width }) => {
   const index = category ? muscles.findIndex(group => group === category ) + 1 : 0;
   return (
     <Paper>
@@ -13,7 +14,9 @@ const Footer = ({ muscles, onSelect, category }) => {
           }}
           indicatorColor="primary"
           textColor="primary"
-          centered
+          centered={width !== 'xs'}
+          scrollable={width === 'xs'}
+          scrollButtons="on"
         >
         <Tab label="All"/>
           { muscles.map(muscle => {
@@ -25,5 +28,5 @@ const Footer = ({ muscles, onSelect, category }) => {
       </Paper>
   )
 }
+)
 
-export default Footer;

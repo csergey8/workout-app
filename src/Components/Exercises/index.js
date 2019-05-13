@@ -1,17 +1,20 @@
 import React, { Fragment } from 'react';
 import { Grid, Paper, Typography, List, ListItem, ListItemText, ListItemLink, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core';
 import Form from './Form';
 
-const styles = {
+const styles = theme => ({
   Paper: {
     padding: 20,
-    marginTop: 10,
-    marginBottom: 10
+    marginTop: 5,
+    height: 500,
+    overflowY: 'auto'
   }
-}
+})
 
-export default ({
+export default withStyles(styles)(({
+  classes,
   exercises,
   exercise, 
   category,
@@ -29,8 +32,8 @@ export default ({
 }) => {
   return (
     <Grid container sm={12}>
-      <Grid item sm={6}>
-        <Paper style={styles.Paper}>
+      <Grid item xs={12} sm={6}>
+        <Paper className={classes.Paper}>
           {exercises.map(([group, exercises]) => {
             return !category || category === group ? (
               <Fragment key={group}>
@@ -64,8 +67,8 @@ export default ({
           })}
         </Paper>
       </Grid>
-      <Grid item sm={6}>
-        <Paper style={styles.Paper}>
+      <Grid item xs={12} sm={6}>
+        <Paper className={classes.Paper}>
           {editMode ? (
             <Fragment>
               <Form
@@ -86,4 +89,4 @@ export default ({
       </Grid>
     </Grid>
   );
-}; 
+}); 
