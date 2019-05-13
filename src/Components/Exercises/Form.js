@@ -8,20 +8,13 @@ import { TextField,
 
 import { withStyles } from '@material-ui/core';
 
-const styles = theme => ({
-    FormControl: {
-      width: 250
-    }
-  })
 
-export default withStyles(styles)(class extends Component {
+
+export default class extends Component {
 
   state = this.getInitialState();
 
-  static getDerivedStateFromProps({ exercise }) {
-    return exercise || null
-  }
-
+ 
   getInitialState() {
     const { exercise } = this.props;
     return exercise ? exercise : {
@@ -45,7 +38,6 @@ export default withStyles(styles)(class extends Component {
       id: this.state.title.toLowerCase().replace(/ /g, '-'),
       ...this.state
     });
-    this.setState(this.getInitialState());
   }
 
   render() {
@@ -58,10 +50,10 @@ export default withStyles(styles)(class extends Component {
           value={title}
           onChange={this.handleChange("title")}
           margin="normal"
-          className={classes.FormControl}
+          fullWidth
         />
         <br />
-        <FormControl className={classes.FormControl}>
+        <FormControl fullWidth>
           <InputLabel htmlFor="muscles">Muscles</InputLabel>
           <Select value={muscles} onChange={this.handleChange("muscles")}>
             {" "}
@@ -80,17 +72,18 @@ export default withStyles(styles)(class extends Component {
           rows="4"
           onChange={this.handleChange("description")}
           margin="normal"
-          className={classes.FormControl}
+          fullWidth
         />
         <br />
         <Button
           color="primary"
           variant="raised"
           onClick={this.handleSubmit}
+          disabled={!title || !muscles}
         >
           { this.props.exercise ? 'Edit' : 'Create' }
         </Button>
       </form>
     );
   }       
-})
+};

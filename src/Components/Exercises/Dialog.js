@@ -52,7 +52,7 @@ export default class Create extends Component {
         <Button variant="fab" mini>
           <Add onClick={this.handleOpen} />
         </Button>
-        <Dialog open={this.state.open} onClose={this.handleClose}>
+        <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>
           <DialogTitle id="form-dialog-title">
             Create a New Exercise
           </DialogTitle>
