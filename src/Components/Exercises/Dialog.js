@@ -49,7 +49,7 @@ export default class Create extends Component {
       
     return (
       <Fragment>
-        <Button variant="fab" mini>
+        <Button variant="fab" mini color='secondary'>
           <Add onClick={this.handleOpen} />
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Paper, Tabs, Tab } from '@material-ui/core'; 
+import { Paper, Tabs, Tab, AppBar } from '@material-ui/core'; 
 import { withWidth } from '@material-ui/core';
 
 
 export default withWidth()(({ muscles, onSelect, category, width }) => {
   const index = category ? muscles.findIndex(group => group === category ) + 1 : 0;
   return (
-    <Paper>
+    <AppBar position="static">
         <Tabs
           value={index}
           onChange={(e, index) => {
             onSelect(index === 0 ? '' : muscles[index - 1])
           }}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="secondary"
+          textColor="secondary"
           centered={width !== 'xs'}
           scrollable={width === 'xs'}
           scrollButtons="on"
@@ -25,7 +25,7 @@ export default withWidth()(({ muscles, onSelect, category, width }) => {
             )
           })}
         </Tabs>
-      </Paper>
+      </AppBar>
   )
 }
 )

@@ -5,11 +5,34 @@ import { withStyles } from '@material-ui/core';
 import Form from './Form';
 
 const styles = theme => ({
-  Paper: {
-    padding: 20,
-    marginTop: 5,
-    height: 500,
-    overflowY: 'auto'
+  paper: {
+    padding: theme.spacing.unit * 2,
+    overflowY: 'auto',
+    [theme.breakpoints.up('sm')]:{
+      marginTop: 5,
+      height: 'calc(100% - 10px)',
+    },
+    [theme.breakpoints.down('xs')]:{
+      height: '100%'
+    }
+  },
+  '@global': {
+    'html, body, #root': {
+      height: '100%'
+    }
+  },
+  container: {
+    [theme.breakpoints.up('sm')]:{
+      height: 'calc(100% - 64px - 48px)'
+    },
+    [theme.breakpoints.down('xs')]:{
+      height: 'calc(100% - 56px - 48px)'
+    }
+  },
+  item: {
+    [theme.breakpoints.down('xs')]:{
+    height: '50%'
+    }
   }
 })
 
@@ -31,15 +54,16 @@ export default withStyles(styles)(({
   },
 }) => {
   return (
-    <Grid container sm={12}>
-      <Grid item xs={12} sm={6}>
-        <Paper className={classes.Paper}>
+    <Grid container sm={12} className={classes.container}>
+      <Grid item xs={12} sm={6} className={classes.item}>
+        <Paper className={classes.paper}>
           {exercises.map(([group, exercises]) => {
             return !category || category === group ? (
               <Fragment key={group}>
                 <Typography
                   variant="headline"
                   style={{ textTransform: "capitalize" }}
+                  color='secondary'
                 >
                   {group}
                 </Typography>
@@ -52,10 +76,10 @@ export default withStyles(styles)(({
                     >
                       <ListItemText primary={exercise.title} />
                       <ListItemSecondaryAction>
-                        <IconButton onClick={() => onSelectEdit(exercise.id)}>
+                        <IconButton onClick={() => onSelectEdit(exercise.id)} color="primary">
                           <Edit />
                         </IconButton>
-                        <IconButton onClick={() => onDelete(exercise.id)}>
+                        <IconButton onClick={() => onDelete(exercise.id)} color="primary">
                           <Delete />
                         </IconButton>
                       </ListItemSecondaryAction>
@@ -67,9 +91,9 @@ export default withStyles(styles)(({
           })}
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={6}>
-        <Paper className={classes.Paper}>
-        <Typography variant="display1" gutterBottom>{title}</Typography>
+      <Grid item xs={12} sm={6} className={classes.item}>
+        <Paper className={classes.paper}>
+        <Typography variant="display1" gutterBottom color='secondary'>{title}</Typography>
           {editMode ? (
             <Fragment>
               <Form
