@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Grid, Paper, Typography, List, ListItem, ListItemText, ListItemLink, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core';
+import { withContext } from '../../context';
 import Form from './Form';
 
 const styles = theme => ({
@@ -36,9 +37,9 @@ const styles = theme => ({
   }
 })
 
-export default withStyles(styles)(({
+const Exercises = ({
   classes,
-  exercises,
+  exercisesByMuscles,
   exercise, 
   category,
   muscles,
@@ -57,7 +58,7 @@ export default withStyles(styles)(({
     <Grid container sm={12} className={classes.container}>
       <Grid item xs={12} sm={6} className={classes.item}>
         <Paper className={classes.paper}>
-          {exercises.map(([group, exercises]) => {
+          {exercisesByMuscles.map(([group, exercises]) => {
             return !category || category === group ? (
               <Fragment key={group}>
                 <Typography
@@ -114,5 +115,6 @@ export default withStyles(styles)(({
         </Paper>
       </Grid>
     </Grid>
-  );
-}); 
+  )}
+
+export default withContext(withStyles(styles)(Exercises));

@@ -3,6 +3,7 @@ import { CssBaseline }  from  '@material-ui/core';
 import { Header, Footer } from './Components/Layouts/index'; 
 import Exercises from './Components/Exercises';
 import { exercises, muscles } from './store';
+import { Provider } from './context';
 
 class App extends Component {
   state = {
@@ -74,25 +75,30 @@ class App extends Component {
     }))
   }
 
+  getContext = () => ({
+    muscles,
+    ...this.state,
+    exercisesByMuscles: this.getExercisesByMuscles(),
+    onCreate: this.handleExerciseCreate,
+    onCategorySelect: this.handleCategorySelect,
+    onEdit: this.handleExerciseEdit,
+    onSelectEdit: this.handleExerciseSelectEdit,
+    onDelete:  this.handleExreciseDelete,
+    onSelect: this.handleExerciseSelect
+  })
+   
+      
+   
+  
+
   render() {
-    const exercises = this.getExercisesByMuscles();
     return (
-      <Fragment>
-      <CssBaseline />
-        <Header muscles={muscles} onExerciseCreate={this.handleExerciseCreate}/>
-        <Exercises 
-        exercises={exercises} 
-        exercise={this.state.exercise} 
-        category={this.state.category} 
-        onSelect={this.handleExerciseSelect}
-        onDelete={this.handleExreciseDelete}
-        onSelectEdit={this.handleExerciseSelectEdit}
-        editMode={this.state.editMode}
-        muscles={muscles}
-        onEdit={this.handleExerciseEdit}
-        />
-        <Footer muscles={muscles} onSelect={this.handleCategorySelect} category={this.state.category}/>
-      </Fragment>
+      <Provider value={this.getContext()}>
+        <CssBaseline />
+          <Header/>
+          <Exercises/>
+          <Footer />
+      </Provider>
     )
   }
 }

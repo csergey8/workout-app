@@ -14,13 +14,14 @@ import {
   } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import Form from './Form';
+import { withContext } from '../../context';
 
 
 
 
 
 
-export default class Create extends Component {
+class CreateDialog extends Component {
   state = {
     open: false
   }
@@ -45,7 +46,7 @@ export default class Create extends Component {
 
   render() {
     const { open } = this.state;
-    const { muscles, onCreate } = this.props;
+    const { muscles } = this.props;
       
     return (
       <Fragment>
@@ -59,8 +60,8 @@ export default class Create extends Component {
           <DialogContent>
             <DialogContentText>Please, fill the form</DialogContentText>
             <Form
-             muscles={muscles}
-             onSubmit={this.handleFormSubmit} 
+            muscles={muscles}
+            onSubmit={this.handleFormSubmit} 
             />
           </DialogContent>
           <DialogActions>
@@ -68,6 +69,8 @@ export default class Create extends Component {
           </DialogActions>
         </Dialog>
       </Fragment>
-    );
+      )
   }
 }
+
+export default withContext(CreateDialog);

@@ -16,10 +16,7 @@ const Header = (props) => {
         <Typography variant="headline" color="inherit" className={props.classes.flex}>
           WorkOut
         </Typography>
-          <CreateDialog 
-          muscles={props.muscles} 
-          onCreate={props.onExerciseCreate}
-          />
+          <CreateDialog />
         </Toolbar>
       </AppBar>
   )
