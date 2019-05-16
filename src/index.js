@@ -1,6 +1,6 @@
+import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { deepOrange, amber } from '@material-ui/core/colors';
 
@@ -19,9 +19,12 @@ const theme = createMuiTheme({
   }
 });
 
-ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <App />
-  </MuiThemeProvider>
-  , document.getElementById('root'));
+import(/* webpackChunkName: 'app' */'./App')
+  .then(({ default: App }) => 
+    render(
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
+    , document.getElementById('root')))
+
 
