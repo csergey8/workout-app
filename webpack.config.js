@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
   output: {
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, "dist")
   },
   devtool: 'cheap-module-source-map',

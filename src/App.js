@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { CssBaseline }  from  '@material-ui/core';
+import CssBaseline from  '@material-ui/core/CssBaseline';
 import { Header, Footer } from './Components/Layouts/index'; 
 import Exercises from './Components/Exercises';
 import { exercises, muscles } from './store';
