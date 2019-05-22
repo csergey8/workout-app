@@ -2,21 +2,23 @@
   "name": "workout-app",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/main.js",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "express": "^4.17.0",
     "material-ui": "^1.0.0-beta.47",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --port 4000 --compress --mode development",
-    "dev": "rm -rf dist  && webpack --mode development --progress",
-    "build": "rm -rf dist  && webpack --mode production --progress",
+    "start": "node dist/main.js",
+    "watch": "webpack --mode development --watch & nodemon dist/main",
+    "dev": "rm -rf dist public && webpack --mode development --progress",
+    "build": "rm -rf dist public && webpack --mode production --progress",
     "stats": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json dist",
-    "analyze": "webpack-bundle-analyzer stats.json dist",
-    "serve": "serve dist"
+    "analyze": "webpack-bundle-analyzer stats.json dist"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,10 +43,11 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.11.2",
-    "html-webpack-plugin": "^4.0.0-beta.5",
+    "nodemon": "^1.19.0",
+    "reload": "^3.0.1",
     "webpack": "^4.31.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-node-externals": "^1.7.2"
   }
 }

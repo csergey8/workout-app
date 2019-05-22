@@ -22,6 +22,10 @@ module.exports = [
     ...common,
     target: 'node',
     entry: './src/server',
-    externals: [nodeExternals()]
+    externals: [nodeExternals({
+      whitelist: [
+        /@material-ui\/core\/*./
+      ]
+    })]
   }
 ];
